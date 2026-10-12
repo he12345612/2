@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML+CSS 图形悬停效果</title>
+    <style>
+        /* ==================== 基础重置 ==================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #1d1b1a;
+            font-family: "Segoe UI", "Microsoft YaHei", system-ui, sans-serif;
+        }
+
+        /* ==================== 舞台：一行排列所有图形 ==================== */
+        .stage {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 56px;
+            padding: 56px 32px;
+        }
+
+        /* ==================== 图形通用样式 ==================== */
+        .cube {
+            /* 每个图形自己的发光颜色，在下面各形状里覆盖 */
+            --glow: rgba(255, 255, 255, .4);
+
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 170px;
+            height: 170px;
+            cursor: pointer;
+
+            /* 默认状态：阴影向下偏移 10px */
+            box-shadow: 0 10px 24px var(--glow);
+            transition: transform .35s ease, box-shadow .35s ease;
+        }
+
+        /* 鼠标滑过：位置上移 10px，阴影偏移量变为 0（变成四周发光） */
+        .cube:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 24px var(--glow);
+        }
+
+        /* 形状中间出现的 “hover” 字样：默认隐藏，滑过时淡入 */
+        .cube span {
+            color: #fff;
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, .25);
+            user-select: none;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity .35s ease;
+        }
+
+        .cube:hover span {
+            opacity: 1;
+        }
+
+        /* ==================== 六个图形的形状与配色 ==================== */
+
+        /* 1. 橙色正方形（直角） */
+        .c1 {
+            --glow: rgba(255, 94, 98, .55);
+            border-radius: 0;
+            background: linear-gradient(135deg, #ff9a56, #ff5e62);
+        }
+
+        /* 2. 绿色圆角方形（小圆角） */
+        .c2 {
+            --glow: rgba(46, 213, 138, .55);
+            border-radius: 26px;
+            background: linear-gradient(135deg, #43e97b, #22c58a);
+        }
+
+        /* 3. 紫色圆角方形（大圆角） */
+        .c3 {
+            --glow: rgba(163, 122, 199, .6);
+            border-radius: 48px;
+            background: linear-gradient(135deg, #b48ad6, #8a6bb0);
+        }
+
+        /* 4. 橙黄色圆形 */
+        .c4 {
+            --glow: rgba(255, 170, 60, .6);
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ffd76e, #ff9f43);
+        }
+
+        /* 5. 青色圆角方形（小圆角） */
+        .c5 {
+            --glow: rgba(58, 158, 148, .6);
+            border-radius: 20px;
+            background: linear-gradient(135deg, #4bb6a6, #2f7f7d);
+        }
+
+        /* 6. 紫色圆形 */
+        .c6 {
+            --glow: rgba(186, 140, 214, .6);
+            border-radius: 50%;
+            background: linear-gradient(135deg, #c9a2e0, #9b7bbd);
+        }
+    </style>
+</head>
+<body>
+    <div class="stage">
+        <div class="cube c1"><span>hover</span></div>
+        <div class="cube c2"><span>hover</span></div>
+        <div class="cube c3"><span>hover</span></div>
+        <div class="cube c4"><span>hover</span></div>
+        <div class="cube c5"><span>hover</span></div>
+        <div class="cube c6"><span>hover</span></div>
+    </div>
+</body>
+</html>
